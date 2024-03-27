@@ -1,7 +1,12 @@
 import { useRecipeContext } from "./RecipesContext";
 
 const RecipesCollection = () => {
-  const { recipes } = useRecipeContext();
+  const { recipes, setRecipes } = useRecipeContext();
+
+  const removeRecipe = (indexToRemove) => {
+    const updatedRecipes = recipes.filter((_, idx) => idx !== indexToRemove);
+    setRecipes(updatedRecipes);
+  };
 
   return (
     <div>
@@ -20,6 +25,7 @@ const RecipesCollection = () => {
             </ul>
             <p>Recipe:</p>
             <p>{recipe.recipe}</p>
+            <button onClick={() => removeRecipe(index)}>X</button>
           </div>
         ))}
       </div>
