@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useRecipeContext } from "./RecipesContext";
 
 const RecipeForm = () => {
-  const [ingredients, setIngredients] = useState([
-    { name: "", unit: "", quantity: "" },
-  ]);
+  const {
+    recipeName,
+    setRecipeName,
+    ingredients,
+    setIngredients,
+    recipeDescription,
+    setRecipeDescription,
+  } = useRecipeContext();
 
   const handleIngredientChange = (index, event) => {
     const newIngredients = [...ingredients];
@@ -18,7 +23,13 @@ const RecipeForm = () => {
   return (
     <form>
       <h3>Name</h3>
-      <input type="text" placeholder="name" required />
+      <input
+        type="text"
+        placeholder="name"
+        value={recipeName}
+        onChange={(e) => setRecipeName(e.target.value)}
+        required
+      />
       <h3>Ingredients</h3>
       {ingredients.map((ingredient, index) => (
         <div key={index}>
@@ -52,7 +63,13 @@ const RecipeForm = () => {
       ))}
       <button onClick={addIngredient}>Add</button>
       <h3>Recipe</h3>
-      <input type="text" placeholder="recipe" required />
+      <input
+        type="text"
+        placeholder="recipe"
+        value={recipeDescription}
+        onChange={(e) => setRecipeDescription(e.target.value)}
+        required
+      />
       <br />
       <input type="submit" value="Add recipe" />
     </form>
