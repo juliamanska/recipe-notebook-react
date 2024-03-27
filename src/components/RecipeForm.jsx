@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useRecipeContext } from "./RecipesContext";
 
 const RecipeForm = () => {
-  const [ingredients, setIngredients] = useState([
-    { name: "", unit: "", quantity: "" },
-  ]);
+  const {
+    recipeName,
+    setRecipeName,
+    ingredients,
+    setIngredients,
+    recipeDescription,
+    setRecipeDescription,
+    recipes,
+    setRecipes,
+  } = useRecipeContext();
 
   const handleIngredientChange = (index, event) => {
     const newIngredients = [...ingredients];
@@ -15,10 +22,30 @@ const RecipeForm = () => {
     setIngredients([...ingredients, { name: "", unit: "g", quantity: "" }]);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newRecipe = {
+      name: recipeName,
+      ingredients: ingredients,
+      recipe: recipeDescription,
+    };
+    setRecipes([...recipes, newRecipe]);
+    setRecipeName("");
+    setIngredients([{ name: "", unit: "", quantity: "" }]);
+    setRecipeDescription("");
+    localStorage.setItem("recipes", JSON.stringify([...recipes, newRecipe]));
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h3>Name</h3>
-      <input type="text" placeholder="name" required />
+      <input
+        type="text"
+        placeholder="name"
+        value={recipeName}
+        onChange={(e) => setRecipeName(e.target.value)}
+        required
+      />
       <h3>Ingredients</h3>
       {ingredients.map((ingredient, index) => (
         <div key={index}>
@@ -36,7 +63,6 @@ const RecipeForm = () => {
             value={ingredient.quantity}
             placeholder="quantity"
             onChange={(event) => handleIngredientChange(index, event)}
-            required
           />
           <select
             name="unit"
@@ -52,7 +78,12 @@ const RecipeForm = () => {
       ))}
       <button onClick={addIngredient}>Add</button>
       <h3>Recipe</h3>
-      <input type="text" placeholder="recipe" required />
+      <input
+        type="text"
+        placeholder="recipe"
+        value={recipeDescription}
+        onChange={(e) => setRecipeDescription(e.target.value)}
+      />
       <br />
       <input type="submit" value="Add recipe" />
     </form>
