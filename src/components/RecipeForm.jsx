@@ -33,6 +33,7 @@ const RecipeForm = () => {
     setRecipeName("");
     setIngredients([{ name: "", unit: "", quantity: "" }]);
     setRecipeDescription("");
+    localStorage.setItem("recipes", JSON.stringify([...recipes, newRecipe]));
   };
 
   return (
@@ -54,6 +55,7 @@ const RecipeForm = () => {
             value={ingredient.name}
             placeholder="ingredient"
             onChange={(event) => handleIngredientChange(index, event)}
+            required
           />
           <input
             type="number"

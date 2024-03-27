@@ -1,16 +1,22 @@
+import { useEffect } from "react";
 import { useRecipeContext } from "./RecipesContext";
 
 const RecipesCollection = () => {
   const { recipes, setRecipes } = useRecipeContext();
 
+  useEffect(() => {
+    const recipeStorage = JSON.parse(localStorage.getItem("recipes")) || [];
+    setRecipes(recipeStorage);
+  }, [setRecipes]);
+
   const removeRecipe = (indexToRemove) => {
     const updatedRecipes = recipes.filter((_, idx) => idx !== indexToRemove);
     setRecipes(updatedRecipes);
+    localStorage.setItem("recipes", JSON.stringify(updatedRecipes));
   };
 
   return (
     <div>
-      <h2>Recipes</h2>
       <div className="recipe-cards">
         {recipes.map((recipe, index) => (
           <div key={index} className="recipe-card">
