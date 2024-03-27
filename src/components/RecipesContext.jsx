@@ -10,6 +10,7 @@ export const RecipeProvider = ({ children }) => {
     { name: "", unit: "", quantity: "" },
   ]);
   const [recipeDescription, setRecipeDescription] = useState("");
+  const [recipes, setRecipes] = useState([]);
 
   return (
     <RecipeContext.Provider
@@ -20,6 +21,8 @@ export const RecipeProvider = ({ children }) => {
         setIngredients,
         recipeDescription,
         setRecipeDescription,
+        recipes,
+        setRecipes,
       }}
     >
       {children}

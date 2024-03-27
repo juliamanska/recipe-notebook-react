@@ -8,6 +8,8 @@ const RecipeForm = () => {
     setIngredients,
     recipeDescription,
     setRecipeDescription,
+    recipes,
+    setRecipes,
   } = useRecipeContext();
 
   const handleIngredientChange = (index, event) => {
@@ -20,8 +22,21 @@ const RecipeForm = () => {
     setIngredients([...ingredients, { name: "", unit: "g", quantity: "" }]);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newRecipe = {
+      name: recipeName,
+      ingredients: ingredients,
+      recipe: recipeDescription,
+    };
+    setRecipes([...recipes, newRecipe]);
+    setRecipeName("");
+    setIngredients([{ name: "", unit: "", quantity: "" }]);
+    setRecipeDescription("");
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h3>Name</h3>
       <input
         type="text"
@@ -39,7 +54,6 @@ const RecipeForm = () => {
             value={ingredient.name}
             placeholder="ingredient"
             onChange={(event) => handleIngredientChange(index, event)}
-            required
           />
           <input
             type="number"
@@ -47,7 +61,6 @@ const RecipeForm = () => {
             value={ingredient.quantity}
             placeholder="quantity"
             onChange={(event) => handleIngredientChange(index, event)}
-            required
           />
           <select
             name="unit"
@@ -68,7 +81,6 @@ const RecipeForm = () => {
         placeholder="recipe"
         value={recipeDescription}
         onChange={(e) => setRecipeDescription(e.target.value)}
-        required
       />
       <br />
       <input type="submit" value="Add recipe" />
