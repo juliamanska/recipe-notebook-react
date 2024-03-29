@@ -39,6 +39,12 @@ const RecipeForm = () => {
     setRecipeDescription("");
     localStorage.setItem("recipes", JSON.stringify([...recipes, newRecipe]));
   };
+  const removeIngredients = (id) => {
+    const reducedIngredients = ingredients.filter(
+      (ingredient) => ingredient.id !== id
+    );
+    setIngredients(reducedIngredients);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -79,6 +85,12 @@ const RecipeForm = () => {
             <option value="ml">ml</option>
             <option value="amount">amount</option>
           </select>
+          <button
+            className="ml-1 scale-x-125 text-lg opacity-25 hover:opacity-100 hover:font-semibold"
+            onClick={() => removeIngredients(ingredient.id)}
+          >
+            X
+          </button>
         </div>
       ))}
       <button onClick={addIngredient}>Add</button>
