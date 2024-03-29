@@ -29,6 +29,7 @@ const RecipeForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newRecipe = {
+      id: Date.now(),
       name: recipeName,
       ingredients: ingredients,
       recipe: recipeDescription,
