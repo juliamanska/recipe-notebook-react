@@ -12,14 +12,18 @@ const RecipeForm = () => {
     setRecipes,
   } = useRecipeContext();
 
-  const handleIngredientChange = (index, event) => {
-    const newIngredients = [...ingredients];
-    newIngredients[index][event.target.name] = event.target.value;
+  const handleIngredientChange = (id, event) => {
+    const newIngredients = ingredients.map((ingredient) =>
+      ingredient.id === id
+        ? { ...ingredient, [event.target.name]: event.target.value }
+        : ingredient
+    );
     setIngredients(newIngredients);
   };
 
   const addIngredient = () => {
-    setIngredients([...ingredients, { name: "", unit: "g", quantity: "" }]);
+    const newIngredient = { id: Date.now(), name: "", unit: "g", quantity: "" };
+    setIngredients([...ingredients, newIngredient]);
   };
 
   const handleSubmit = (event) => {
@@ -47,14 +51,14 @@ const RecipeForm = () => {
         required
       />
       <h3>Ingredients</h3>
-      {ingredients.map((ingredient, index) => (
-        <div key={index}>
+      {ingredients.map((ingredient) => (
+        <div key={ingredient.id}>
           <input
             type="text"
             name="name"
             value={ingredient.name}
             placeholder="ingredient"
-            onChange={(event) => handleIngredientChange(index, event)}
+            onChange={(event) => handleIngredientChange(ingredient.id, event)}
             required
           />
           <input
@@ -63,13 +67,13 @@ const RecipeForm = () => {
             name="quantity"
             value={ingredient.quantity}
             placeholder="quantity"
-            onChange={(event) => handleIngredientChange(index, event)}
+            onChange={(event) => handleIngredientChange(ingredient.id, event)}
           />
           <select
             name="unit"
             value={ingredient.unit}
             id="selectUnit"
-            onChange={(event) => handleIngredientChange(index, event)}
+            onChange={(event) => handleIngredientChange(ingredient.id, event)}
           >
             <option value="g">g</option>
             <option value="ml">ml</option>
