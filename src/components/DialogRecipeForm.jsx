@@ -13,7 +13,12 @@ function DialogCloseButton() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Add new recipe</Button>
+        <Button
+          variant="secondary"
+          className="add-button mt-6 text-md bg-brownSugar text-white hover:scale-125 hover:bg-brownSugar"
+        >
+          Add new recipe
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

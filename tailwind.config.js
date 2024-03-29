@@ -33,6 +33,7 @@ module.exports = {
       },
       colors: {
         isabelline: "#fcf7f4",
+        brownSugar: "#A77D65",
       },
     },
   },
