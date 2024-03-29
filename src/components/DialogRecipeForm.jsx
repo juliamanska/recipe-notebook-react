@@ -20,10 +20,10 @@ function DialogCloseButton() {
           Add new recipe
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="bg-isabelline rounded-lg py-8">
         <DialogHeader>
-          <DialogTitle>New recipe</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-3xl font-mono">New recipe</DialogTitle>
+          <DialogDescription className="text-md">
             Fill the form to add new recipe!
           </DialogDescription>
         </DialogHeader>
