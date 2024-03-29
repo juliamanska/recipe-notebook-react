@@ -48,22 +48,24 @@ const RecipeForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3>Name</h3>
+      <h3 className="font-bold text-lg">Name</h3>
       <input
         type="text"
         placeholder="name"
         value={recipeName}
+        className="rounded-lg p-1 mb-3"
         onChange={(e) => setRecipeName(e.target.value)}
         required
       />
-      <h3>Ingredients</h3>
+      <h3 className="font-bold text-lg">Ingredients</h3>
       {ingredients.map((ingredient) => (
-        <div key={ingredient.id}>
+        <div className="flex mb-2" key={ingredient.id}>
           <input
             type="text"
             name="name"
             value={ingredient.name}
             placeholder="ingredient"
+            className="w-full rounded-lg p-1 mr-2"
             onChange={(event) => handleIngredientChange(ingredient.id, event)}
             required
           />
@@ -73,12 +75,14 @@ const RecipeForm = () => {
             name="quantity"
             value={ingredient.quantity}
             placeholder="quantity"
+            className="w-full rounded-lg p-1 mr-2"
             onChange={(event) => handleIngredientChange(ingredient.id, event)}
           />
           <select
             name="unit"
             value={ingredient.unit}
             id="selectUnit"
+            className="w-1/2 rounded-lg p-1 mr-2"
             onChange={(event) => handleIngredientChange(ingredient.id, event)}
           >
             <option value="g">g</option>
@@ -86,23 +90,37 @@ const RecipeForm = () => {
             <option value="amount">amount</option>
           </select>
           <button
-            className="ml-1 scale-x-125 text-lg opacity-25 hover:opacity-100 hover:font-semibold"
+            className="ml-1 scale-x-125 text-lg opacity-50 hover:opacity-100 hover:font-semibold"
             onClick={() => removeIngredients(ingredient.id)}
           >
             X
           </button>
         </div>
       ))}
-      <button onClick={addIngredient}>Add</button>
-      <h3>Recipe</h3>
-      <input
-        type="text"
+      <div className="flex justify-end">
+        <button
+          className=" p-1 px-4 bg-brownSugar w-1/3 text-white rounded-3xl opacity-75 hover:scale-105 hover:opacity-100"
+          onClick={addIngredient}
+        >
+          Next ingredient
+        </button>
+      </div>
+
+      <h3 className="font-bold text-lg">Recipe</h3>
+      <textarea
         placeholder="recipe"
         value={recipeDescription}
+        className=" w-full rounded-lg p-1 mb-3"
         onChange={(e) => setRecipeDescription(e.target.value)}
+        rows={1}
       />
-      <br />
-      <input type="submit" value="Add recipe" />
+      <div className="flex justify-end">
+        <input
+          className="w-1/3 text-lg font-semibold p-2 px-4 bg-black text-white rounded-3xl hover:scale-105"
+          type="submit"
+          value="Add recipe"
+        />
+      </div>
     </form>
   );
 };
