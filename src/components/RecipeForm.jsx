@@ -59,6 +59,7 @@ const RecipeForm = () => {
           />
           <input
             type="number"
+            min={0}
             name="quantity"
             value={ingredient.quantity}
             placeholder="quantity"
