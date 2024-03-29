@@ -28,11 +28,8 @@ const RecipeCard = ({ recipe }) => {
       </ul>
       <p>Recipe:</p>
       <p className="break-words ml-4">{recipe.recipe}</p>
-      <button
-        className="absolute right-3 top-2 opacity-50 hover:opacity-100 hover:font-semibold"
-        onClick={() => removeRecipe(recipe.id)}
-      >
-        Remove recipe
+      <button className="absolute right-3 top-2 opacity-50 hover:opacity-100 hover:font-semibold">
+        <AlertDialogRemove confirm={() => removeRecipe(recipe.id)} />
       </button>
     </div>
   );
