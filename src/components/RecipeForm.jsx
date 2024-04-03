@@ -93,8 +93,6 @@ const RecipeForm = () => {
             <option value="tbsp">tbsp</option>
             <option value="glass">glass</option>
             <option value="piece">piece</option>
-            <option value="cup">cup</option>
-            <option value="bunch">bunch</option>
           </select>
           <button
             className="ml-1 scale-x-125 text-lg opacity-50 hover:opacity-100 hover:font-semibold"
