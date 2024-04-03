@@ -15,6 +15,7 @@ const SearchRecipes = () => {
   return (
     <form>
       <input
+        className="p-1 px-2 mt-7 w-full text-lg rounded-xl border focus:border-brownSugar"
         onChange={(e) => setSearchValue(e.target.value)}
         type="search"
         id="mySearch"

@@ -15,7 +15,7 @@ function DialogCloseButton() {
       <DialogTrigger asChild>
         <Button
           variant="secondary"
-          className="add-button mt-6 text-md bg-brownSugar text-white hover:scale-125 hover:bg-brownSugar"
+          className="mt-6 text-md bg-brownSugar text-white hover:scale-125 hover:bg-brownSugar"
         >
           Add new recipe
         </Button>
