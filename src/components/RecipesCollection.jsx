@@ -3,7 +3,7 @@ import { useRecipeContext } from "./RecipesContext";
 import RecipeCard from "./RecipeCard";
 
 const RecipesCollection = () => {
-  const { recipes, setRecipes } = useRecipeContext();
+  const { setRecipes, filteredRecipes } = useRecipeContext();
 
   useEffect(() => {
     const recipeStorage = JSON.parse(localStorage.getItem("recipes")) || [];
@@ -13,7 +13,7 @@ const RecipesCollection = () => {
   return (
     <div>
       <div className="recipe-cards">
-        {recipes.map((recipe, index) => (
+        {filteredRecipes.map((recipe, index) => (
           <RecipeCard key={index} index={index} recipe={recipe} />
         ))}
       </div>

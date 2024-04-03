@@ -11,6 +11,7 @@ export const RecipeProvider = ({ children }) => {
   ]);
   const [recipeDescription, setRecipeDescription] = useState("");
   const [recipes, setRecipes] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
 
   return (
     <RecipeContext.Provider
@@ -23,6 +24,8 @@ export const RecipeProvider = ({ children }) => {
         setRecipeDescription,
         recipes,
         setRecipes,
+        filteredRecipes,
+        setFilteredRecipes,
       }}
     >
       {children}
