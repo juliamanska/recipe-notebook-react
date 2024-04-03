@@ -22,7 +22,7 @@ const RecipeForm = () => {
   };
 
   const addIngredient = () => {
-    const newIngredient = { id: Date.now(), name: "", unit: "g", quantity: "" };
+    const newIngredient = { id: Date.now(), name: "", unit: " ", quantity: "" };
     setIngredients([...ingredients, newIngredient]);
   };
 
@@ -86,9 +86,15 @@ const RecipeForm = () => {
             className="w-1/2 rounded-lg p-1 mr-2"
             onChange={(event) => handleIngredientChange(ingredient.id, event)}
           >
+            <option value="amount"> </option>
             <option value="g">g</option>
             <option value="ml">ml</option>
-            <option value="amount">amount</option>
+            <option value="tsp">tsp</option>
+            <option value="tbsp">tbsp</option>
+            <option value="glass">glass</option>
+            <option value="piece">piece</option>
+            <option value="cup">cup</option>
+            <option value="bunch">bunch</option>
           </select>
           <button
             className="ml-1 scale-x-125 text-lg opacity-50 hover:opacity-100 hover:font-semibold"
