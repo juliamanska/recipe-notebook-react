@@ -3,20 +3,17 @@ import { useRecipeContext } from "./RecipesContext";
 import RecipeCard from "./RecipeCard";
 
 const RecipesCollection = () => {
-  const { setRecipes, filteredRecipes } = useRecipeContext();
+  const { filteredRecipes, refreshRecipes } = useRecipeContext();
 
   useEffect(() => {
-    const recipeStorage = JSON.parse(localStorage.getItem("recipes")) || [];
-    setRecipes(recipeStorage);
-  }, [setRecipes]);
+    refreshRecipes();
+  }, []);
 
   return (
-    <div>
-      <div className="recipe-cards">
-        {filteredRecipes.map((recipe, index) => (
-          <RecipeCard key={index} index={index} recipe={recipe} />
-        ))}
-      </div>
+    <div className="recipe-cards">
+      {filteredRecipes.map((recipe, index) => (
+        <RecipeCard key={index} index={index} recipe={recipe} />
+      ))}
     </div>
   );
 };
