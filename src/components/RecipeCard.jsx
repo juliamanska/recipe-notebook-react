@@ -2,12 +2,17 @@ import AlertDialogRemove from "./AlertDialogRemove";
 import { useRecipeContext } from "./RecipesContext";
 
 const RecipeCard = ({ recipe }) => {
-  const { recipes, setRecipes } = useRecipeContext();
+  const { API_URL, refreshRecipes } = useRecipeContext();
 
-  const removeRecipe = (idToRemove) => {
-    const updatedRecipes = recipes.filter((recipe) => recipe.id !== idToRemove);
-    setRecipes(updatedRecipes);
-    localStorage.setItem("recipes", JSON.stringify(updatedRecipes));
+  const removeRecipe = async (id) => {
+    fetch(API_URL + "recipeapi/recipeproject/DeleteRecipes?id=" + id, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result);
+        refreshRecipes();
+      });
   };
 
   return (
