@@ -13,6 +13,14 @@ export const RecipeProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
 
+  const API_URL = "http://localhost:5038/";
+
+  const refreshRecipes = async () => {
+    fetch(API_URL + "recipeapi/recipeproject/GetRecipes")
+      .then((response) => response.json())
+      .then((data) => setRecipes(data));
+  };
+
   return (
     <RecipeContext.Provider
       value={{
@@ -26,6 +34,8 @@ export const RecipeProvider = ({ children }) => {
         setRecipes,
         filteredRecipes,
         setFilteredRecipes,
+        API_URL,
+        refreshRecipes,
       }}
     >
       {children}
