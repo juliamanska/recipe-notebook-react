@@ -8,8 +8,8 @@ const RecipeForm = () => {
     setIngredients,
     recipeDescription,
     setRecipeDescription,
-    recipes,
-    setRecipes,
+    API_URL,
+    refreshRecipes,
   } = useRecipeContext();
 
   const handleIngredientChange = (id, event) => {
@@ -28,17 +28,28 @@ const RecipeForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newRecipe = {
-      id: Date.now(),
-      name: recipeName,
-      ingredients: ingredients,
-      recipe: recipeDescription,
-    };
-    setRecipes([...recipes, newRecipe]);
+
+    const data = new FormData();
+    data.append("name", recipeName);
+    data.append("recipe", recipeDescription);
+    ingredients.forEach((ingredient, index) => {
+      data.append(`ingredients[${index}][name]`, ingredient.name);
+      data.append(`ingredients[${index}][quantity]`, ingredient.quantity);
+      data.append(`ingredients[${index}][unit]`, ingredient.unit);
+    });
+
+    fetch(API_URL + "recipeapi/recipeproject/AddRecipes", {
+      method: "POST",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result);
+        refreshRecipes();
+      });
     setRecipeName("");
     setIngredients([{ name: "", unit: "", quantity: "" }]);
     setRecipeDescription("");
-    localStorage.setItem("recipes", JSON.stringify([...recipes, newRecipe]));
   };
   const removeIngredients = (id) => {
     const reducedIngredients = ingredients.filter(
